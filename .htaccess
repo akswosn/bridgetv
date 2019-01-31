@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^http://icanpr.cafe24.com$ [NC,OR]
+RewriteCond %{REQUEST_URI} !/dbmanager
+RewriteCond %{REQUEST_URI} !/bridgetv/public
+RewriteRule (.*) /bridgetv/public/$1 [L]
