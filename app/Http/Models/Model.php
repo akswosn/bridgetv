@@ -46,18 +46,27 @@ class Model{
         }
         $selectParam = Model::commonParam($param);
 
-        if(array_key_exists('order', $filter) ){
-            $sql .= ' order by '.$filter['order'];
-        }
+        
 
         if(array_key_exists('start', $filter)  && array_key_exists('end', $filter) ){
             $sql = "select @RNUM := @RNUM + 1 AS rownum,
                     a.* from ( ".$sql." ) a 
-                    , ( SELECT @RNUM := 0 ) R
-                LIMIT ?, ? ";
+                    , ( SELECT @RNUM := 0 ) R ";
+            if(array_key_exists('order', $filter) ){
+                $sql .= ' order by '.$filter['order'];
+            }
+            $sql .= " LIMIT ?, ? ";
+            
             $selectParam[] = $filter['start'];
             $selectParam[] = $filter['end'];
         }
+        else {
+            if(array_key_exists('order', $filter) ){
+                $sql .= ' order by '.$filter['order'];
+            }
+        }
+        // var_dump($sql);
+        // var_dump($selectParam); exit;
         return  DB::select($sql, $selectParam);
     }
 
@@ -69,6 +78,18 @@ class Model{
         }
         $selectParam = Model::commonParam($param);
         return  DB::select($sql, $selectParam)[0];
+    }
+
+    public static function selectPrevNextBuild($table, $id){
+        $sql = "select id,
+            (select max(id) from icanpr.feedback where ID < D.ID) as prev, 
+            (select min(id) from icanpr.feedback where ID > D.ID) as next
+            from ".$table." D
+            where id = ? ";
+        $param = array();
+        $param[] = $id;
+
+        return  DB::select($sql, $param)[0];
     }
 
     public static function insertBuild($table, $param){

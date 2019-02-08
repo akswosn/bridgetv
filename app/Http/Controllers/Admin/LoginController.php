@@ -35,6 +35,7 @@ class LoginController extends Controller
             $account = array(
                 'userid'=>$param['userid'],
                 'password'=>$param['password'],
+                'del'=>'N'
             );
             $user = AccountModel::select($account, array());
             
@@ -44,7 +45,7 @@ class LoginController extends Controller
 
                 return redirect('/_admin/login')
                 ->withErrors([
-                    'msg' => '로그인실패',
+                    'message' => '로그인실패',
                 ]);
             }
             else{
@@ -64,7 +65,7 @@ class LoginController extends Controller
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }

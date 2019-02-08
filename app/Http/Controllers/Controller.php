@@ -18,4 +18,31 @@ class Controller extends BaseController
 		}
 		return true;
 	}
+
+	protected static function getPageNavi($url, $page, $pageList, $total, $param){
+
+		$totalPage = ceil($total / $pageList);
+		
+		
+		$firstPage = 1+((ceil($page/10) -1)*10);
+		$lastPage = $firstPage+9;
+		
+		if($lastPage > $totalPage){
+			$lastPage = $totalPage;
+		}
+		
+		if(!empty($param["page"])){
+			unset($param["page"]);
+		}
+		
+		return array(
+			'url'=>$url,
+			'page'=>$page,
+			'pageList'=>$pageList,
+			'totalList'=>$totalPage,
+			'param'=>http_build_query($param),
+			'first'=>$firstPage,
+			'last'=>$lastPage
+		);
+	}
 }

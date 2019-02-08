@@ -21,5 +21,9 @@ class ProgramSectionModel extends Model{
     public static function delete($param){
         return Model::deleteBuild("program_section", $sql, $param);
     }
+
+    public static function selectCount($param){
+        return  Model::selectCountBuild("program_section", $param);
+    }
 }   
 ?>

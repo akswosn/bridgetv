@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Inobiz</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+    <!--CSS-->
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <!--JS-->
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <ul>
+                <li class="left">                    
+                    <p>홈페이지 관리 시스템 <span></span></p>
+                </li>
+                <li class="right">
+                    <a href="" class="logout">logout</a>
+                </li>
+            </ul>
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="title">메인페이지 디자인</li>
+                <li><a class="on" href="">- 메인 배너</a></li>
+                <li><a href="">- 프로그램 노출</a></li>
+            </ul>
+            <ul>
+                <li class="title">프로그램 등록/수정</li>
+                <li><a href="">- 프로그램 리스트</a></li>
+                <li><a href="">- 프로그램 등록</a></li>
+            </ul>
+            <ul>
+                <li class="title">게시판</li>
+                <li><a href="">- 공지사항</a></li>
+                <li><a href="">- 편성표</a></li>
+                <li><a href="">- 시청자 의견</a></li>
+            </ul>
+            <ul>
+                <li class="title">관리자 설정</li>
+                <li><a href="">- 계정 관리</a></li>
+            </ul>
+            <ul>
+                <li class="footer">
+                    Copyright ⓒ 2019 아이캔피알.<br/>All Rights Reserved.
+                </li>
+            </ul>
+        </div>
+        <div id="container">
+            
+            <div class="content">
+                <h2>프로그램 등록</h2>
+                <h3>기본 정보 입력</h3>
+                <div class="table-wrap">
+                    <table width="100%" class="table-row" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col width="120px">
+                            <col width="480px">
+                        </colgroup>    
+                        <tr>
+                            <th>구분</th>
+                            <td>
+                                <label>
+                                    <input type="radio" name="" value="방영" class="form-radio"> 방영
+                                </label>
+                                <label>
+                                    <input type="radio" name="" value="종영" class="form-radio"> 종영
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>프로그램명</th>
+                            <td>
+                                <label>
+                                    <input style="width:480px" type="text" name="" class="form-text" placeholder="프로그램명 입력해주세요.">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기획의도</th>
+                            <td>
+                                <label>
+                                    <input style="width:480px" type="text" class="form-text" placeholder="기획의도를 입력해주세요.">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>장르</th>
+                            <td>
+                                <label>
+                                    <input style="width:480px" type="text" class="form-text" placeholder="장르를 입력해주세요.">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>길이</th>
+                            <td>
+                                <label>
+                                    <input style="width:480px" type="text" class="form-text" placeholder="길이를 입력해주세요.">
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>출연진</th>
+                            <td>
+                                <label>
+                                    <input style="width:480px" type="text" class="form-text" placeholder="출연진을 입력해주세요.">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="table-search-wrap">
+                    <div class="left"> 
+                        <div class="dataTables_filter">
+                            대표 이미지 :
+                            <label>
+                                <input type="file" class="form-file">
+                                <button type="button" class="btn btn-search float-right">수정하기</button>
+                            </label>
+                        </div>                      
+                    </div>
+                </div>
+                
+                <h3>회차 영상 등록</h3>
+                <div class="table-wrap">
+                    <table width="100%" class="table" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col width="55px">
+                            <col width="200px">
+                            <col width="145px"/>
+                            <col width="100px">
+                            <col width="100px">
+                        </colgroup>                                
+                        <thead>
+                            <tr>
+                                <th>회차</th>
+                                <th>제목</th>
+                                <th>유튜브 링크</th>
+                                <th>최근 수정일시</th>
+                                <th>회차 영상 관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5" class="center"><button type="button" class="btn btn-add">회차 영상 추가하기 +</button></td>
+                            </tr>
+                            <tr>
+                                <td>1회</td>
+                                <td>
+                                    <label>
+                                        <input style="width:200px" type="text" class="form-text" placeholder="제목을 입력해주세요.">
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                            <input type="text" class="form-text" placeholder="유튜브 링크">
+                                    </label>
+                                </td>
+                                <td>2019-01-01 00:00:00</td>
+                                <td>
+                                    <button type="button" class="btn btn-save">저장</button>
+                                    <button type="button" class="btn btn-delete">제거</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2회</td>
+                                <td>
+                                    <label>
+                                        <input style="width:200px" type="text" class="form-text" placeholder="제목을 입력해주세요.">
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                            <input type="text" class="form-text" placeholder="유튜브 링크">
+                                    </label>
+                                </td>
+                                <td>2019-01-01 00:00:00</td>
+                                <td>
+                                    <button type="button" class="btn btn-save">저장</button>
+                                    <button type="button" class="btn btn-delete">제거</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3회</td>
+                                <td>
+                                    <label>
+                                        <input style="width:200px" type="text" class="form-text" placeholder="제목을 입력해주세요.">
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                            <input type="text" class="form-text" placeholder="유튜브 링크">
+                                    </label>
+                                </td>
+                                <td>2019-01-01 00:00:00</td>
+                                <td>
+                                    <button type="button" class="btn btn-save">저장</button>
+                                    <button type="button" class="btn btn-delete">제거</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn btn-write float-right">등록하기</button>
+                    <button type="button" class="btn btn-cancel float-left">취소하기</button>
+                    <button type="button" class="btn btn-delete float-left">삭제하기</button>
+                </div>
+            </div>
+                   
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

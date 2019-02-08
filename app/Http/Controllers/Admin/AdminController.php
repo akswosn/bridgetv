@@ -24,7 +24,7 @@ class AdminController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
             return view('admin.main');
@@ -33,7 +33,7 @@ class AdminController extends Controller
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }

@@ -18,7 +18,7 @@ class AccountController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
             $param = $request->all();
@@ -30,11 +30,16 @@ class AccountController extends Controller
 
 
             $user = AccountModel::select(array("del"=>"N")
-                , array("order"=>"id desc","start"=>$start, "end"=>$end));
+                , array("order"=>"id desc","start"=>$start, "end"=>$listCount));
 
             $userCount = AccountModel::selectCount(array("del"=>"N"));
+            $pn =  Controller::getPageNavi('/_admin/account',$page, $listCount, $userCount->count, array());  
             
-            return view('admin.account.index', array('account'=>$user, 'count'=>$userCount, 'page'=>$page, 'listCount'=>$listCount));
+            return view('admin.account.index', array('account'=>$user
+                                                , 'count'=>$userCount->count
+                                                , 'page'=>$page
+                                                , 'listCount'=>$listCount
+                                                , 'pageNavigator'=>$pn));
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
@@ -53,16 +58,14 @@ class AccountController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
             $param = $request->all();
             
-           ;
+
             $user = AccountModel::select(array("id"=>$id)
                 , array());
-
-            
             
             return view('admin.account.uForm', array('account'=>$user[0]));
         }
@@ -70,7 +73,7 @@ class AccountController extends Controller
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }
@@ -82,7 +85,7 @@ class AccountController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
             
@@ -93,7 +96,7 @@ class AccountController extends Controller
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }
@@ -105,15 +108,43 @@ class AccountController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
+            $validator = Validator::make($request->all(), [
+                'type'=>'required',
+                'name'=>'required',
+                'userid'=>'required',
+                'password'=>'required',
+		        'password_confirm'=>'required|same:password',
+             ]);
             
             $param = $request->all();
-            
+
+            if ($validator->fails()) {
+                
+                return redirect('/_admin/account/reg')
+                ->withInput()
+                ->withErrors($validator);
+            }
+
+            $check = array(
+                'userid'=>$param['userid'],
+                'del'=>'N'
+            );
+
+            $userCount = AccountModel::selectCount($check);
+            if(!empty($userCount)){
+                
+                if($userCount->count > 0){
+                    return redirect('/_admin/account/reg')->withInput()
+                    ->withErrors([
+                        'userid' => '중복된 아이디입니다.',
+                    ]);
+                }
+            }
 
 
-            
             $account = array(
                 'userid'=>$param['userid'],
                 'password'=>$param['password'],
@@ -122,13 +153,14 @@ class AccountController extends Controller
             );
             AccountModel::insert($account);
 
-            return redirect('/_admin/account');
+            return redirect('/_admin/account')
+                ->with('success','등록되었습니다.');
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }
@@ -141,11 +173,25 @@ class AccountController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
-            
+            $validator = Validator::make($request->all(), [
+                'type'=>'required',
+                'name'=>'required',
+                'userid'=>'required',
+                'password_pre'=>'required|min:8',
+                'password'=>'',
+		        'password_confirm'=>'same:password',
+             ]);
+
             $param = $request->all();
+
+            if ($validator->fails()) {
+                return redirect('/_admin/account/detail/'.$id)
+                ->withInput()
+                ->withErrors($validator);;
+            }
 
             $account = array(
                 'userid'=>$param['userid'],
@@ -157,7 +203,7 @@ class AccountController extends Controller
                 //로그인 실패
                 return redirect('/_admin/account/detail/'.$id)
                 ->withErrors([
-                    'msg' => '이전비밀번호 오류',
+                    'message' => '이전비밀번호 오류',
                 ]);
             }
 
@@ -168,19 +214,20 @@ class AccountController extends Controller
                 'name'=>$param['name'],
                 'type'=>$param['type']
             );
+
             if($param['password'] != ''){
                 $account['password'] = $param['password'];
             }
 
             AccountModel::update($account, array('id'=>$id));
 
-            return redirect('/_admin/account');
+            return redirect('/_admin/account')->with('success','수정되었습니다.');
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }
@@ -191,7 +238,7 @@ class AccountController extends Controller
             if(Controller::isLogin() === false){
                 return redirect('/_admin/login')
                         ->withErrors([
-                            'msg' => '로그인 후 이용가능합니다.',
+                            'message' => '로그인 후 이용가능합니다.',
                         ]);
             }
             
@@ -202,13 +249,13 @@ class AccountController extends Controller
             );
             AccountModel::update($account, array('id'=>$id));
 
-            return redirect('/_admin/account');
+            return redirect('/_admin/account')->with('success','삭제되었습니다.');
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
                 return redirect('/_admin/login')
                     ->withErrors([
-                        'msg' => 'Validation Token was expired. Please try again',
+                        'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
             }
         }

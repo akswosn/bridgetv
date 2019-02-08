@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Inobiz</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+    <!--CSS-->
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <!--JS-->
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <ul>
+                <li class="left">                    
+                    <p>홈페이지 관리 시스템 <span></span></p>
+                </li>
+                <li class="right">
+                    <a href="" class="logout">logout</a>
+                </li>
+            </ul>
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="title">메인페이지 디자인</li>
+                <li><a class="on" href="">- 메인 배너</a></li>
+                <li><a href="">- 프로그램 노출</a></li>
+            </ul>
+            <ul>
+                <li class="title">프로그램 등록/수정</li>
+                <li><a href="">- 프로그램 리스트</a></li>
+                <li><a href="">- 프로그램 등록</a></li>
+            </ul>
+            <ul>
+                <li class="title">게시판</li>
+                <li><a href="">- 공지사항</a></li>
+                <li><a href="">- 편성표</a></li>
+                <li><a href="">- 시청자 의견</a></li>
+            </ul>
+            <ul>
+                <li class="title">관리자 설정</li>
+                <li><a href="">- 계정 관리</a></li>
+            </ul>
+            <ul>
+                <li class="footer">
+                    Copyright ⓒ 2019 아이캔피알.<br/>All Rights Reserved.
+                </li>
+            </ul>
+        </div>
+        <div id="container">
+            
+            <div class="content">
+                <h2>시청자 의견</h2>                
+                <div class="table-wrap">
+                    <table width="100%" class="table-row table-view" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col width="80px">
+                            <col width="200px">
+                            <col width="80px">
+                            <col width="200px">
+                            <col width="80px">
+                            <col width="40px">
+
+                        </colgroup>    
+                        <tr>
+                            <th>이름</th>
+                            <td>조영두</td>
+                            <th>작성일</th>
+                            <td>2019-01-01</td>
+                            <th rowspan="2">확인 여부</th>
+                            <td rowspan="2">
+                                <label>
+                                    <input type="checkbox" name="" value="확인여부" class="form-checkbox"> 
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이메일</th>
+                            <td>otwocho@hanmail.net</td>
+                            <th>휴대폰</th>
+                            <td>010-0101-0100</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="table-textarea">
+                                    NVDA에서 객체는 컨트롤 또는 프로그램의 일부를 나타냅니다. 여기에는 버튼, 체크박스, 편집 가능한 필드, 도구 모음, 슬라이더 및 응용 프로그램 창 등이 포함됩니다. NVDA 사용자뿐만 아니라 스크린 리더 사용자는 이러한 객체들을 키보드를 사용하여 탐색하고 조작합니다.
+                                    NVDA를 사용할 때 이러한 객체의 동작을 변경하여 NVDA 사용자의 탐색을 향상시킬 수 있습니다.
+                                    NVDA 객체는 계층적으로 구성되거나 부모 - 자식 관계로 구성됩니다. 예를 들어 Windows 탐색기의 목록 개체에는 하나 이상의 목록 항목이 포함될 수 있으며, 이 목록의 부모는 Windows 탐색기 창일 수 있습니다. 키보드를 통해 현재 초점이 위치한 객체를 초점 객체(focus object)라고 하며, 키보드 초점을 벗어나지 않고도 어디에서나 탐색할 수 있는 객체를 탐색 객체(navigator object)라고 합니다. 탐색 객체는 키보드 초점 여부와 상관없이 어디에서나 사용할 수 있는 객체입니다. NVDA 사용자는 현재 초점을 받은 객체에서 벗어나지 않고도 NVDA의 탐색 객체를 통해 응용 프로그램을 탐색할 수 있습니다.
+                                    NVDA 객체에는 객체의 이름, 값 (편집 윈도우의 텍스트 등), 역할 (체크박스, 윈도우 등), 위치 (화면 좌표) 등과 같은 유용한 속성이 포함되어 있으며, 객체의 값을 변경하거나, 객체의 이벤트에 반응(포커스를 얻거나 값이 변경되는 등)과 같은 객체를 조작할 수 있는 유용한 메소드를 포함합니다.
+                                    많은 경우에 NVDA 객체는 IAccessible, JAB(Java Access Bridge), UIA(UI Automation)와 같은 접근성 API 관련 객체의 클래스에 속할 수 있으며, NVDA는 객체 클래스를 처리하는 방법을 제공합니다. 이러한 클래스는 NVDA 소스 코드의 NVDAObjects 디렉토리에 정의되어 있으며 해당 객체를 추가 기능에서 사용하려면 사용 중인 객체에 대한 적절한 객체 클래스 핸들러를 import합니다(예 :IAccessible 객체를 사용하여 작업 중이라면, NVDAObjects.IAccessible을 import합니다).
+                                    이러한 객체 클래스 중 가상 버퍼와 Tree Interceptor라는 특별한 객체가 있습니다. Tree Interceptor를 사용하면 NVDA가 트리 구조의 객체를 하나의 객체인 것처럼 작업할 수 있습니다. Tree Interceptor가 사용될 수 있는 경우는 NVDA가 PDF 문서, 웹페이지와 같은 복잡한 문서 작업을 할 수 있게 하는 가상 버퍼입니다. 이러한 객체에는 주어진 키보드 명령이 응용 프로그램에 전달되거나 NVDA에 의해 처리되는지 여부를 결정하거나 가상 커서를 통해 한 글자 명령을 사용하여 헤딩 간 이동과 같은 특수 메커니즘이 포함됩니다. </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>다음글</th>
+                            <td colspan="5">
+                                <p class="page-none">다음글이 없습니다.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이전글</th>
+                            <td colspan="5">
+                                <a href="">아이조아앙이조아</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="btn-wrap">
+                        <button type="button" class="btn btn-write float-right">목록</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

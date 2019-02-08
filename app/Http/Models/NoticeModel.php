@@ -21,5 +21,8 @@ class NoticeModel extends Model{
     public static function delete($param){
         return Model::deleteBuild("notice", $sql, $param);
     }
+    public static function selectCount($param){
+        return  Model::selectCountBuild("notice", $param);
+    }
 }   
 ?>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Inobiz</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1">
+    <!--CSS-->
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <!--JS-->
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <ul>
+                <li class="left">                    
+                    <p>홈페이지 관리 시스템 <span></span></p>
+                </li>
+                <li class="right">
+                    <a href="" class="logout">logout</a>
+                </li>
+            </ul>
+        </div>
+        <div id="menu">
+            <ul>
+                <li class="title">메인페이지 디자인</li>
+                <li><a class="on" href="">- 메인 배너</a></li>
+                <li><a href="">- 프로그램 노출</a></li>
+            </ul>
+            <ul>
+                <li class="title">프로그램 등록/수정</li>
+                <li><a href="">- 프로그램 리스트</a></li>
+                <li><a href="">- 프로그램 등록</a></li>
+            </ul>
+            <ul>
+                <li class="title">게시판</li>
+                <li><a href="">- 공지사항</a></li>
+                <li><a href="">- 편성표</a></li>
+                <li><a href="">- 시청자 의견</a></li>
+            </ul>
+            <ul>
+                <li class="title">관리자 설정</li>
+                <li><a href="">- 계정 관리</a></li>
+            </ul>
+            <ul>
+                <li class="footer">
+                    Copyright ⓒ 2019 아이캔피알.<br/>All Rights Reserved.
+                </li>
+            </ul>
+        </div>
+        <div id="container">
+            
+            <div class="content">
+                <h2>프로그램 노출</h2>
+                <div class="table-wrap">
+                    <table width="100%" class="table-row" cellpadding="0" cellspacing="0">
+                        <colgroup>
+                            <col width="120px">
+                            <col width="480px">
+                        </colgroup>    
+                        <tr>
+                            <th rowspan="3">노출순서</th>
+                            <td>
+                                <label>
+                                    <input type="radio" name="" value="최신 등록 순" class="form-radio"> 최신 등록 순
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="radio" name="" value="조회수 순" class="form-radio"> 조회수 순
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="radio" name="" value="직접 지정" class="form-radio"> 직접 지정
+                                </label>
+                                <div class="program-wrap">
+                                    <ul>
+                                        <li>
+                                            <a href=""><img src="/images/program.jpg"></a>
+                                            <p>이미쉘의 I CAN SING 2회</p>
+                                        </li>
+                                        <li>
+                                            <a href=""><img src="/images/program.jpg"></a>
+                                            <p>이미쉘의 I CAN SING 2회</p>
+                                        </li>
+                                        <li>
+                                            <a href=""><img src="/images/program.jpg"></a>
+                                            <p>이미쉘의 I CAN SING 2회</p>
+                                        </li>
+                                        <li>
+                                            <a href=""><img src="/images/program.jpg"></a>
+                                            <p>전공탐구생활 4회</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn btn-write float-right">적용하기</button>
+                </div>                   
+            </div>
+
+            
+        </div>
+        <div class="pop-layer">            
+            <div class="title">
+                <h3>메인에 노출할 영상을 직접 선택하세요.</h3>
+                <a class="btn-close" href="" aria-label="Close">
+                    <i class="fa fa-close"></i>
+                </a>
+            </div>
+            <div class="search-wrap">
+                <label>
+                    <input type="search" class="form-control" placeholder="제목, 내용">
+                    <button type="button" class="btn btn-search">검색하기</button>
+                </label>
+            </div>
+            <div class="program-list">
+                <ul>
+                    <li>
+                        <p>검색 결과가 없습니다.</p>
+                    </li>
+                    <li>
+                        <a href="">전공탐구생활</a>
+                    </li>
+                    <li>
+                        <a href="">전공탐구생활</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn btn-write float-right">적용하기</button>
+            </div>  
+        </div>
+        <div class="deemed" style="display: block;"></div>
+    </div>    
+</body>
+</html>

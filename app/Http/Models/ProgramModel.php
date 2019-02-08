@@ -9,6 +9,10 @@ class ProgramModel extends Model{
     public static function select($param, $filter){
         return  Model::selectBuild("program", $param, $filter);
     }
+    
+    public static function selectCount($param){
+        return  Model::selectCountBuild("program", $param);
+    }
 
     public static function insert($param){
         return  Model::insertBuild("program", $param);

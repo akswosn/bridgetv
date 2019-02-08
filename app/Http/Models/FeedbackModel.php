@@ -21,7 +21,11 @@ class FeedbackModel extends Model{
     }
 
     public static function delete($param){
-        return Model::deleteBuild("feedback", $sql, $param);
+        return Model::deleteBuild("feedback", $param);
+    }
+
+    public static function selectPrevNextId($id){
+        return Model::selectPrevNextBuild("feedback", $id);
     }
 }   
 ?>
