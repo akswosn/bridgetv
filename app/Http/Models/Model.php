@@ -47,7 +47,6 @@ class Model{
         $selectParam = Model::commonParam($param);
 
         
-
         if(array_key_exists('start', $filter)  && array_key_exists('end', $filter) ){
             $sql = "select @RNUM := @RNUM + 1 AS rownum,
                     a.* from ( ".$sql." ) a 
@@ -65,8 +64,8 @@ class Model{
                 $sql .= ' order by '.$filter['order'];
             }
         }
-        // var_dump($sql);
-        // var_dump($selectParam); exit;
+        //  var_dump($sql);
+        //  var_dump($selectParam); exit;
         return  DB::select($sql, $selectParam);
     }
 
@@ -82,13 +81,13 @@ class Model{
 
     public static function selectPrevNextBuild($table, $id){
         $sql = "select id,
-            (select max(id) from icanpr.feedback where ID < D.ID) as prev, 
-            (select min(id) from icanpr.feedback where ID > D.ID) as next
-            from ".$table." D
-            where id = ? ";
+            (select max(id) from ".$table." where ID < D.ID and del = 'N') as prev, 
+            (select min(id) from ".$table." where ID > D.ID and del = 'N') as next
+            from ( select * from ".$table." where del = 'N') D
+            where id = ?  ";
         $param = array();
         $param[] = $id;
-
+        // echo $sql;
         return  DB::select($sql, $param)[0];
     }
 
@@ -186,7 +185,16 @@ class Model{
     public static function commonParam($array){
         $result = array();
         foreach ($array as $key => $value) {
-            $result[] =  $value;
+            if(strpos($key, 'in') === false){
+                $result[] =  $value;
+            }
+            else {
+                
+                foreach ($value as $v) {
+                    $result[] = $v;
+                }
+            }
+
         }
 
         return  $result;
@@ -223,18 +231,61 @@ class Model{
     public static function selectWhereBuild($array){
         $result = "";
         foreach ($array as $key => $value) {
-            $t = '?';
-            if($key == 'password'){//password func
-                $t = 'password( ? )';
+            if(strpos($key, '|') !== false){
+                $arr = explode("|",$key);
+                $str = '';
+                if($arr[0] == 'like'){
+
+                    if($result === ''){
+                        $result .= $arr[1].' like ?';
+                    }
+                    else {
+                        $result .= ' and '.$arr[1].' like ?';
+                    }
+
+
+                }
+                else if($arr[0] == 'in'){
+                    if($result === ''){
+                        $result .= $arr[1].' in ( ';
+                    }
+                    else {
+                        $result .= ' and '.$arr[1].' in ( ';
+                    }
+                    
+                    $addA = ''; 
+                    
+                    foreach($value as $v){
+                        if($addA == ''){
+                            $addA .= '?';
+                        }
+                        else {
+                            $addA .= ', ?';
+                        }
+                    }
+                    $result .= $addA .' ) ';
+                }
+
+
+
+            }
+            else{
+
+                $t = '?';
+                if($key == 'password'){//password func
+                    $t = 'password( ? )';
+                }
+    
+    
+                if($result == ''){
+                    $result .= ' '.$key.' = '.$t;
+                }
+                else {
+                    $result .= ' and '.$key.' = '.$t;
+                }
             }
 
 
-            if($result == ''){
-                $result .= ' '.$key.' = '.$t;
-            }
-            else {
-                $result .= ' and '.$key.' = '.$t;
-            }
         }
         return 'where '.$result ;
     }

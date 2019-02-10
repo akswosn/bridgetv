@@ -304,6 +304,7 @@ class ProgramController extends Controller
             else {
                 $config = new \stdclass;
                 $config->id = 0;
+                $config->option = '';
             }
             
             //program
@@ -321,7 +322,7 @@ class ProgramController extends Controller
             }
             else if( $type == 'custom'){
                 $selecter['del'] = 'N';
-                $selecter['id'] = $config->option;
+                $selecter['in|id'] = explode(',',$config->option);
             }
 
             $program =  ProgramModel::select($selecter, $filter);
@@ -359,15 +360,24 @@ class ProgramController extends Controller
 
             $param = $request->all();
 
-            if($param['id'] == 0){//insert
+          
 
+            if($param['id'] == 0){//insert
+                ConfigModel::insert(array('type'=>$param['type']
+                                            , 'option'=>$param['option']
+                                            , 'name'=>'program'
+                                        ));
             }
             else {//update
-
+                ConfigModel::update(array('type'=>$param['type']
+                                            , 'option'=>$param['option']
+                                            
+                                        ),
+                                    array('id'=>$param['id']));
             }
            
 
-            return redirect('/_admin/login')->with('success','저장되었습니다.');
+            return redirect('/_admin/program/config')->with('success','저장되었습니다.');
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
@@ -380,5 +390,30 @@ class ProgramController extends Controller
         
     }
 
+    public static function programSearch(Request $request, $keyword=''){
 
+        try{
+            if(Controller::isLogin() === false){
+                return redirect('/_admin/login')
+                        ->withErrors([
+                            'message' => '로그인 후 이용가능합니다.',
+                        ]);
+            }
+
+            $param = $request->all();
+
+            $program = ProgramModel::select(array("del"=>"N",  'like|name'=>'%'.$keyword.'%')
+                , array("start"=>0, "end"=>4));
+
+            return response() ->json($program, 200);
+        }
+        catch(Exception $e){
+            if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
+                return redirect('/_admin/login')
+                    ->withErrors([
+                        'message' => 'Validation Token was expired. Please try again',
+                        'message-type' => 'danger']);
+            }
+        }
+    }
 }

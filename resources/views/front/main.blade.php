@@ -3,12 +3,49 @@
 
 
 @section('content')
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ&callback=initMap" async defer></script>
+<script>
+//AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ
+var map1;
+var map2;
+function initMap() {
+    map1 = new google.maps.Map(document.getElementById('map1'), {
+        center: {lat: 37.551930, lng: 126.917985},
+        zoom: 18
+    });
+    map2 = new google.maps.Map(document.getElementById('map2'), {
+        center: {lat: 37.059839, lng: 127.356765},
+        zoom: 15
+    });
+
+    var marker = new google.maps.Marker({
+        position: {lat: 37.551930, lng: 126.917985},
+        map: map1,
+       
+    });
+
+    var marker = new google.maps.Marker({
+        position: {lat: 37.059839, lng: 127.356765},
+        map: map2,
+       
+    });
+}
+</script>
 <section class="main">
     <!-- Swiper -->
     <div class="swiper-container">
         <div class="swiper-wrapper">
+            <!--
             <div class="swiper-slide">WE ARE YOUNG!</div>
             <div class="swiper-slide">WE ARE YOUNG!</div>
+            -->
+            @forelse($banners as $index => $item)
+                <div class="swiper-slide">
+                    <img style="height:470px" src="{{$banners_files[$item->id]->file_path}}/{{$banners_files[$item->id]->file_name}}" />
+                </div>
+            @empty
+                <div class="swiper-slide">등록된 배너가 존재하지 않습니다.</div>
+            @endforelse  
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
@@ -77,30 +114,17 @@
     <h2>Program</h2>
     <div class="program-wrap">
         <ul>
+        @forelse($programs as $index => $item)
             <li>
-                <a href="/program/detail/1">
-                    <img src="/images/program.jpg">
-                    <p>이미쉘의 I CAN SING 2회</p>
+                <a href="/program/detail/{{$item->id}}">
+                    <img src="{{$programs_files[$item->id]->file_path}}/{{$programs_files[$item->id]->file_name}}">
+                    <p>{{$item->name}}</p>
                 </a>
             </li>
-            <li>
-                <a href="/program/detail/1">
-                    <img src="/images/program.jpg">
-                    <p>이미쉘의 I CAN SING 2회</p>
-                </a>
-            </li>
-            <li>
-                <a href="/program/detail/1">
-                    <img src="/images/program.jpg">
-                    <p>이미쉘의 I CAN SING 2회</p>
-                </a>
-            </li>
-            <li>
-                <a href="/program/detail/1">
-                    <img src="/images/program.jpg">
-                    <p>이미쉘의 I CAN SING 2회</p>
-                </a>
-            </li>
+        @empty
+            <li> 등록된 프로그램이 존재하지 않습니다. </li>
+        @endforelse 
+           
         </ul>
     </div>
     <div class="btn-wrap">
@@ -111,8 +135,8 @@
     <h2>Contact</h2>
     <ul>
         <li>
-            <div class="map">
-                지도
+            <div class="map" id="map1">
+                
             </div>
             <div>
                 <h3>서울사무소</h3>
@@ -121,8 +145,8 @@
             </div>
         </li>
         <li>
-            <div class="map">
-                지도
+            <div class="map" id="map2">
+                
             </div>
             <div>
                 <h3>안성사무실</h3>
@@ -139,7 +163,11 @@
                 <div>                            
                     <p>
                         공지사항
-                        <a href="">시스템 안정화를 위한 서비스 점검 안내 </a>                                
+                        @if(!empty($notice))
+                        <a href="/board/notice/detail/{{$notice->id}}">{{$notice->title}} </a>    
+                        @else 
+                            등록된 공지사항이 존재하지 않습니다.
+                        @endif
                     </p>
                     <a href="/board/notice">더보기 +</a>
                 </div>

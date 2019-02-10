@@ -690,7 +690,7 @@
 
 #wrapper .pop-layer {
   width: 500px;
-  height: 500px;
+  /* height: 500px; */
   background: #ffffff;
   position: absolute;
   left: 50%;

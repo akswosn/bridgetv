@@ -40,7 +40,7 @@ class BannerController extends Controller
                     }
                 }
             }
-
+// var_dump($files);
             return view('admin.banner.index', array('banner'=>$banner,'files'=>$files));
         }
         catch(Exception $e){
@@ -73,7 +73,30 @@ class BannerController extends Controller
                 BannerModel::update(array('file_id'=>$param['file_id']), array('id'=>$param['id']));
             }
             
-            return redirect('/_admin/banner')->with('success','정상 반영되었습니다.');;
+            return redirect('/_admin/banner')->with('success','정상 반영되었습니다.');
+        }
+        catch(Exception $e){
+            if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
+                return redirect('/_admin/login')
+                    ->withErrors([
+                        'message' => 'Validation Token was expired. Please try again',
+                        'message-type' => 'danger']);
+            }
+        }
+    }
+
+    public static function delete(Request $request, $id = 0){
+        try{
+            if(Controller::isLogin() === false){
+                return redirect('/_admin/login')
+                        ->withErrors([
+                            'message' => '로그인 후 이용가능합니다.',
+                        ]);
+            }
+
+            BannerModel::update(array('del'=>'Y'), array('id'=>$id));
+
+            return redirect('/_admin/banner')->with('success','삭제되었습니다.');
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error

@@ -12,9 +12,7 @@
 */
 
 //frontend
-Route::get('/', function () {
-    return view('front.main');
-});
+Route::get('/', 'Front\MainController@main');
 
 
 
@@ -34,6 +32,11 @@ Route::get('/program/detail/{id}', function () {
 Route::get('/board/notice', function () {
     return view('front.board.notice');
 });
+Route::get('/board/notice/{page}', function () {
+    return view('front.board.notice');
+});
+Route::get('/board/notice/detail/{id}', 'Front\BoardController@noticeDetail');
+
 Route::get('/board/pairing', function () {
     return view('front.board.pairing');
 });
@@ -54,6 +57,9 @@ Route::get('/_admin', 'Admin\AdminController@main');
 
 
 Route::get('/_admin/program/config', 'Admin\ProgramController@config');
+Route::post('/_admin/program/config', 'Admin\ProgramController@configAction');
+//api PROGRAM SEARCH
+Route::get('/_admin/program/search/{keyword}', 'Admin\ProgramController@programSearch');
 
 Route::get('/_admin/program/list', 'Admin\ProgramController@list');
 Route::get('/_admin/program/list/{page}', 'Admin\ProgramController@list');
@@ -72,7 +78,7 @@ Route::post('/api/fileUpload', 'FileController@upload');
 /**배너 */
 Route::get('/_admin/banner', 'Admin\BannerController@index');
 Route::post('/_admin/banner/update', 'Admin\BannerController@update');
-
+Route::get('/_admin/banner/delete/{id}', 'Admin\BannerController@delete');
 
 /**공지사항 */
 Route::get('/_admin/notice', 'Admin\NoticeController@index');

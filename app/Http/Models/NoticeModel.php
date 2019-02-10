@@ -24,5 +24,8 @@ class NoticeModel extends Model{
     public static function selectCount($param){
         return  Model::selectCountBuild("notice", $param);
     }
+    public static function selectPrevNextId($id){
+        return Model::selectPrevNextBuild("notice", $id);
+    }
 }   
 ?>
