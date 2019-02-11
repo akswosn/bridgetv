@@ -185,7 +185,7 @@ class Model{
     public static function commonParam($array){
         $result = array();
         foreach ($array as $key => $value) {
-            if(strpos($key, 'in') === false){
+            if(strpos($key, 'in|') === false){
                 $result[] =  $value;
             }
             else {
