@@ -3,6 +3,21 @@
 
 
 @section('content')
+<script>
+function onAction(){
+    if(!$('#check').is(':checked')){
+        $('#fileError').remove();
+        $('body').append('<div id="fileError" class="message_box error"><span>개인정보 수집/이용에 동의해주세요.</span></div>');
+        $('#fileError').click(function(){
+            $(this).fadeOut('slow');
+        });
+        return;
+    }
+    else {
+        $('#regfrm').submit();
+    }
+}
+</script>
 <div class="tab">
     <ul class="nav">
         <li>
@@ -17,6 +32,8 @@
     </ul>
 </div>
  <!-- 시청자의견 시작 -->
+<form id="regfrm" name="regfrm" method="post" action="/board/feedback">
+{!! csrf_field() !!}
  <div class="table-wrap">
     <table width="100%" class="table-row" cellpadding="0" cellspacing="0">
         <colgroup class="pc-colgroup">
@@ -31,7 +48,8 @@
             <th>이름</th>
             <td>
                 <label>
-                    <input type="text" class="form-text" placeholder="이름을 입력해주세요.">
+                    <input type="text" class="form-text" placeholder="이름을 입력해주세요." id="name" name="name" value="{{old('name')}}">
+                    {!! $errors->first('name', '<br/><span class="form-error">:message</span>') !!}
                 </label>
             </td>
         </tr>
@@ -39,7 +57,8 @@
             <th>이메일</th>
             <td>
                 <label>
-                    <input type="text" class="form-text" placeholder="이메일을 입력해주세요.">
+                    <input type="text" class="form-text" placeholder="이메일을 입력해주세요." id="email" name="email" value="{{old('email')}}">
+                    {!! $errors->first('email', '<br/><span class="form-error">:message</span>') !!}
                 </label>
             </td>
         </tr>
@@ -47,7 +66,8 @@
             <th>휴대전화</th>
             <td>
                 <label>
-                    <input type="tel" class="form-text" placeholder="휴대전화 번호를 입력해주세요.">
+                    <input type="tel" class="form-text" placeholder="휴대전화 번호를 입력해주세요."id="phone" name="phone" value="{{old('phone')}}">
+                    {!! $errors->first('phone', '<br/><span class="form-error">:message</span>') !!}
                 </label>
             </td>
         </tr>
@@ -55,16 +75,18 @@
             <th>문의사항</th>
             <td>
                 <label>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="content" id="content" cols="30" rows="10" >{{old('content')}}</textarea>
+                    {!! $errors->first('content', '<br/><span class="form-error">:message</span>') !!}
                 </label>                            
             </td>
         </tr>
     </table>
+    
 </div> 
 <div class="privacy-wrap">
     <ul>
         <label>
-            <input type="checkbox" class="form-checkbox"> 
+            <input type="checkbox" class="form-checkbox" id="check" name="check" {{old('check') != null ? 'checked':''}}> 
             개인정보 수집/이용에 동의합니다.
         </label>
         <p>
@@ -75,11 +97,12 @@
         </p>     
     </ul>
                 
-</div>           
+</div>    
+</form>       
 <div class="btn-wrap">
     <ul>
         <li>
-            <button type="button" class="btn btn-write float-right">문의하기</button>
+            <button type="button" class="btn btn-write float-right" onclick="onAction();">문의하기</button>
         </li>
     </ul>
 </div>

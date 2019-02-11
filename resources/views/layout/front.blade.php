@@ -18,10 +18,21 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    
+    <script>
+        $(function(){
+            if($('.message_box')){
+                $('.message_box').click(function(){
+                    $('.message_box').fadeOut('slow');
+                })
+            }
+        })
+    </script>
 </head>
 <body>
-    
+{!! $errors->first('message','<div class="message_box error"><span>:message</span></div>') !!}
+@if(session('success'))
+<div class="message_box success"><span>{{ session('success') }}</span></div>
+@endif
     <div id="wrapper">
         @include('front.common.leftmenu')
 

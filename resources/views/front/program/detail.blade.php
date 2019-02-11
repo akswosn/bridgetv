@@ -6,7 +6,7 @@
 <div class="sorting">
     <ul>
         <li class="left">
-            <a href="/program/current"><span></span>뒤로</a>
+            <a href="/program/current/1"><span></span>뒤로</a>
         </li>
     </ul>
 </div>

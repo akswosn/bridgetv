@@ -16,34 +16,29 @@ Route::get('/', 'Front\MainController@main');
 
 
 
-Route::get('/program/current', function () {
-    return view('front.program.current');
-});
-Route::get('/program/end', function () {
-    return view('front.program.end');
-});
-Route::get('/program/all', function () {
-    return view('front.program.all');
-});
+Route::get('/program/current/{order}', 'Front\ProgramController@current');
+Route::get('/program/end/{order}', 'Front\ProgramController@end');
+Route::get('/program/all/{order}', 'Front\ProgramController@all');
+Route::get('/program/current/{order}/{page}', 'Front\ProgramController@current');
+Route::get('/program/end/{order}/{page}', 'Front\ProgramController@end');
+Route::get('/program/all/{order}/{page}', 'Front\ProgramController@all');
+
+
 Route::get('/program/detail/{id}', function () {
     return view('front.program.detail');
 });
 
-Route::get('/board/notice', function () {
-    return view('front.board.notice');
-});
-Route::get('/board/notice/{page}', function () {
-    return view('front.board.notice');
-});
+Route::get('/board/notice', 'Front\BoardController@noticeList');
+Route::get('/board/notice/{page}','Front\BoardController@noticeList');
+
 Route::get('/board/notice/detail/{id}', 'Front\BoardController@noticeDetail');
 
-Route::get('/board/pairing', function () {
-    return view('front.board.pairing');
-});
+Route::get('/board/pairing', 'Front\BoardController@pairing');
+
 Route::get('/board/feedback', function () {
     return view('front.board.feedback');
 });
-
+Route::post('/board/feedback', 'Front\BoardController@feedback');
 
 //admin
 Route::get('/_admin/login', 'Admin\LoginController@login');

@@ -41,50 +41,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>공지</td>
-                <td><a href="">전공탐구생활</a></td>
-                <td>2019-01-01</td>
-                <td>868</td>
-            </tr>
-            <tr>
-                <td>공지</td>
-                <td><a href="">전공탐구생활</a></td>
-                <td>2019-01-01</td>
-                <td>868</td>
-            </tr>
-            <tr>
-                <td>공지</td>
-                <td><a href="">전공탐구생활</a></td>
-                <td>2019-01-01</td>
-                <td>868</td>
-            </tr>
+        @forelse($notice as $item)
+        <tr>
+            <td>공지</td>
+            <td><a href="/board/notice/detail/{{$item->id}}">{{$item->title}}</a></td>
+            <td>{{$item->createdate}}</td>
+            <td>{{$item->hit == null ? 0 : $item->hit}}</td>
+        </tr>
+        @empty
+            <tr> <td colspan="4" style="text-align: center">데이터가 존재하지 않습니다.</td></tr>
+        @endforelse  
         </tbody>
     </table>
 </div>
-<nav class="page-wrap">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="" aria-label="Previous">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="">1</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="">2</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="">3</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="" aria-label="Next">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        </li>
-    </ul>
-</nav>
+@include('admin.common.page')
 <!-- 공지사항 리스트 끝 -->
 @stop
 

@@ -128,7 +128,7 @@ function initMap() {
         </ul>
     </div>
     <div class="btn-wrap">
-        <a href="/program/current">더보기 +</a>
+        <a href="/program/current/1">더보기 +</a>
     </div>
 </section>
 <section id="contact" class="contact">

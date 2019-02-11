@@ -1673,4 +1673,37 @@
     display: block !important;
   }
 }
+/** Error box **/
+.message_box {
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  bottom: 0px;
+  cursor: pointer;
+  z-index: 9999;
+}
+.error{
+  background-color: #ff3e3e;
+}
+.success{
+  background-color: #1854fc;
+}
+.error span {
+  color: white;
+  background: url(../images/error.png) no-repeat left 19px;
+  padding: 15px;
+  line-height: 50px;
+  font-weight: bolder;
+  letter-spacing: 0;
+}
+.success span {
+  color: white;
+  padding: 15px;
+  line-height: 50px;
+  font-weight: bolder;
+  letter-spacing: 0;
+}
+.form-error {
+  color : #ff3e3e;font-weight:bold;
+}
 /*# sourceMappingURL=style.css.map */

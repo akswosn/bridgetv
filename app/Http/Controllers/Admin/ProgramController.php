@@ -47,7 +47,7 @@ class ProgramController extends Controller
             }
 
             $programCount = ProgramModel::selectCount(array("del"=>"N"));
-            $pn =  Controller::getPageNavi('/_admin/account',$page, $listCount, $programCount->count, array());  
+            $pn =  Controller::getPageNavi('/_admin/program/list',$page, $listCount, $programCount->count, array());  
 
 
             return view('admin.program.list', array('program'=>$program, 'sectionCount'=> $sectionCount

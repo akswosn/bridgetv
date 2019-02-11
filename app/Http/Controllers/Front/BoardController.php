@@ -6,6 +6,9 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 use App\Http\Models\NoticeModel;
+use App\Http\Models\PairingModel;
+use App\Http\Models\FileModel;
+use App\Http\Models\FeedbackModel;
 
 class BoardController extends Controller 
 {
@@ -14,18 +17,36 @@ class BoardController extends Controller
     }
 
     
-    public static function list(Request $request){
+    public static function noticeList(Request $request, $page=1){
 
         try{
             $param = $request->all();
             
-            
 
-            return view('front.main',array());
+            $listCount = 10;
+
+            
+            $start = ($page-1) * $listCount;
+            $end = $page * $listCount;
+
+
+            $notice = NoticeModel::select(array("del"=>"N")
+                , array("order"=>"id desc","start"=>$start, "end"=>$listCount));
+
+            $count = NoticeModel::selectCount(array("del"=>"N"));
+
+            $pn =  Controller::getPageNavi('/board/notice',$page, $listCount, $count->count, array());  
+
+            return view('front.board.notice', 
+                    array('notice'=>$notice
+                        , 'count'=>$count
+                        , 'page'=>$page
+                        , 'listCount'=>$count->count
+                        , 'pageNavigator'=>$pn));
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
-                return redirect('/_admin/login')
+                return redirect('/')
                     ->withErrors([
                         'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
@@ -63,7 +84,7 @@ class BoardController extends Controller
         }
         catch(Exception $e){
             if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
-                return redirect('/_admin/login')
+                return redirect('/')
                     ->withErrors([
                         'message' => 'Validation Token was expired. Please try again',
                         'message-type' => 'danger']);
@@ -71,4 +92,82 @@ class BoardController extends Controller
         }
         
     }
+
+  
+    public static function pairing(Request $request){
+
+        try{
+
+            $pairing = PairingModel::select(array("del"=>"N")
+                , array());
+
+            if(!empty($pairing)){
+                $pairing = $pairing[0];
+            }
+
+            $pairing = PairingModel::select(array('del'=>'N'), array());
+            $file = null;
+            if(!empty($pairing)){
+                $pairing = $pairing[0]; 
+                $file = FileModel::select(array('id'=>$pairing->file_id), array());
+                if(!empty($file)){
+                    $file = $file[0];
+                }
+                else {
+                    $file = null;
+                }
+                
+            }
+            return view('front.board.pairing', array('pairing'=>$pairing,'file'=>$file));
+        }
+        catch(Exception $e){
+            if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
+                return redirect('/')
+                    ->withErrors([
+                        'message' => 'Validation Token was expired. Please try again',
+                        'message-type' => 'danger']);
+            }
+        }
+        
+    }
+
+    public static function feedback(Request $request){
+
+        try{
+            $validator = Validator::make($request->all(), [
+                'name'=> 'required' ,
+                'email'=>'required|email' ,
+                'phone'=> 'required',
+                'content'=>'required' 
+            ]);
+            $param = $request->all();
+               
+            
+            if ($validator->fails()) {
+                return redirect('/board/feedback')
+                ->withInput()
+                ->withErrors($validator);;
+            }
+
+            
+
+            FeedbackModel::insert(array(
+                'name'=>$param['name'],
+                'email'=>$param['email'],
+                'phone'=>$param['phone'],
+                'content'=>$param['content'],
+            ));
+            return redirect('/board/feedback') ->with('success','시청자 의견이 등록 되었습니다.');;
+        }
+        catch(Exception $e){
+            if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
+                return redirect('/')
+                    ->withErrors([
+                        'message' => 'Validation Token was expired. Please try again',
+                        'message-type' => 'danger']);
+            }
+        }
+        
+    }
+
 }

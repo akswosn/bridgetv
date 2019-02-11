@@ -19,7 +19,11 @@
 <!-- 편성표 시작 -->
 <div class="pairing-wrap">
     <p>
-        <img src="../images/pairing.jpg" border="0">
+    @if(!empty($pairing))
+        <img src="{{$file->file_path}}/{{$file->file_name}}" border="0"/>
+    @else 
+        등록된 편성표가 없습니다.
+    @endif
     </p>
 </div>
 <!-- 편성표 끝 -->
