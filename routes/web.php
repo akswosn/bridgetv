@@ -24,9 +24,7 @@ Route::get('/program/end/{order}/{page}', 'Front\ProgramController@end');
 Route::get('/program/all/{order}/{page}', 'Front\ProgramController@all');
 
 
-Route::get('/program/detail/{id}', function () {
-    return view('front.program.detail');
-});
+Route::get('/program/detail/{id}', 'Front\ProgramController@detail');
 
 Route::get('/board/notice', 'Front\BoardController@noticeList');
 Route::get('/board/notice/{page}','Front\BoardController@noticeList');

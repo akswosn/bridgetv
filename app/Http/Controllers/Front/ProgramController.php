@@ -192,4 +192,28 @@ class ProgramController extends Controller
         }
         
     }
+
+    public static function detail(Request $request, $id = 0){
+        try{
+            $param = $request->all();
+
+            $program = ProgramModel::select(array("id"=>$id), array());
+            if(!empty($program)){
+                $program = $program[0];
+            }
+            $file = FileModel::select(array('id'=>$program->file_id), array());
+            $section = FileModel::select(array('p_id'=>$id, 'del'=>'N'), array("order"=>'section asc'));
+            return view('front.program.detail', array(
+                'program'=>$program , 'file'=>$file 
+            ));
+        }
+        catch(Exception $e){
+            if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
+                return redirect('/_admin/login')
+                    ->withErrors([
+                        'message' => 'Validation Token was expired. Please try again',
+                        'message-type' => 'danger']);
+            }
+        }
+    }
 }

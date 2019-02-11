@@ -16,7 +16,20 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/jquery.easing.1.3.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <style>
+    .anchor  {
+        display: block;
+        height: 60px; /*same height as header*/
+        margin-top: -60px; /*same height as header*/
+        visibility: hidden;
+    }
+    .anchor2{
+        display: block;
+        height: 20px; /*same height as header*/
+        margin-top: -20px; /*same height as header*/
+        visibility: hidden;
+    }
+    </style>
     <!-- Styles -->
     <script>
         $(function(){

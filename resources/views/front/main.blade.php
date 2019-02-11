@@ -5,6 +5,7 @@
 @section('content')
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ&callback=initMap" async defer></script>
 <script>
+
 //AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ
 var map1;
 var map2;
@@ -51,14 +52,16 @@ function initMap() {
         <div class="swiper-pagination"></div>
     </div>
 </section>
-<section id="vision" class="vision">
+<span class="anchor" id="vision" ></span>
+<section class="vision" >
     <h2>vision</h2>
     <p>
         연결에서 개척으로, Find New Contents! <strong>브릿지TV!</strong><br/>
         <span>브릿지TV가 새로운 모습으로 찾아갑니다!</span>
     </p>
 </section>
-<section id="channel" class="channel">
+<span class="anchor2" id="channel"></span>
+<section  class="channel"  >
     <h2>Channel</h2>
     <div class="channel-list-01">
         <ul>
@@ -101,7 +104,8 @@ function initMap() {
         </ul>
     </div>
 </section>
-<section id="advertising" class="partner">
+<span class="anchor" id="advertising" ></span>
+<section class="partner">
     <div>
         BRIDGE TV는 <span>여러분의 광고, 제작지원, 제작협찬 제안을 기다립니다.</span><br/>
         <strong>청년문화를 이끌어나가는 브릿지TV의 든든한 파트너가 되어주세요.</strong>
@@ -110,7 +114,8 @@ function initMap() {
         </p>                    
     </div>
 </section>
-<section id="program" class="program">
+<span class="anchor" id="program"></span>
+<section  class="program">
     <h2>Program</h2>
     <div class="program-wrap">
         <ul>
@@ -131,7 +136,8 @@ function initMap() {
         <a href="/program/current/1">더보기 +</a>
     </div>
 </section>
-<section id="contact" class="contact">
+<span class="anchor" id="contact"></span>
+<section  class="contact">
     <h2>Contact</h2>
     <ul>
         <li>
@@ -156,7 +162,8 @@ function initMap() {
         </li>
     </ul>
 </section>
-<section id="board" class="board">
+<span class="anchor" id="board"></span>
+<section  class="board">
     <div class="board-wrap">
         <ul>
             <li>
