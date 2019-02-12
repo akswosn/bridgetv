@@ -21,5 +21,13 @@ class BannerModel extends Model{
     public static function delete($param){
         return Model::deleteBuild("banner", $sql, $param);
     }
+
+    public static function selectCount($param){
+        return  Model::selectCountBuild("banner", $param);
+    }
+
+    public static function selectOpenMax(){
+        return  DB::select("SELECT max(open)+1 as open FROM banner", array())[0];
+    }
 }   
 ?>

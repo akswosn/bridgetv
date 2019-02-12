@@ -9,6 +9,15 @@ function onDelete(id){
        }
 }
 
+function onAddMain(id, cnt){
+       window.location.href='/_admin/banner/addMain/'+id;
+}
+
+function onRemoveMain(id){
+       if(confirm('이미지 라이브러리로 이동하시겠습니까?') == true){
+              window.location.href='/_admin/banner/deleteMain/'+id;
+       }
+}
 </script>
 
 <div class="content">
@@ -30,6 +39,7 @@ function onDelete(id){
               </div>                      
        </div>
        </div>
+       <!--
        <h3>현재 등록 이미지</h3>
        <div class="table-wrap">
        <table width="100%" class="table-row" cellpadding="0" cellspacing="0">
@@ -38,7 +48,7 @@ function onDelete(id){
                      <col width="520px">
                      <col width="55px">
               </colgroup>                               
-              @forelse($banner as $index => $item)
+              @forelse($lib_banner as $index => $item)
               <tr>
                      <th>{{$index+1}}</th>
                      <td>
@@ -54,23 +64,47 @@ function onDelete(id){
                      <tr> <th colspan="3" style="text-align: center">베너가 존재하지 않습니다.</th></tr>
               @endforelse 
               
-<!--
-              <th>2</th>
-              <td>
-                     <div class="table-textarea">
-                            <img src="/images/banner.jpg" border="0">
-                     </div>
-              </td>
-              <td class="center"><button type="button" class="btn btn-delete float-right">삭제</button></td>
-              </tr>
--->
+
        </table>
-       </div>
-       <!--
-       <div class="btn-wrap">
-              <button type="button" class="btn btn-write float-right">메인배너 적용하기</button>
-       </div>
-       -->
+       </div>-->
+              <h3>이미지 라이브러리</h3>
+              <div class="table-wrap">
+                     <div class="program-wrap form-background-gray">
+                     <ul style="padding: 20px 10px;">
+                     @forelse($lib_banner as $index => $item)
+                            <li>
+                                   <a href="#"><img src="{{$files[$item->id]->file_path}}/{{$files[$item->id]->file_name}}"></a>
+                                   <div style="text-align:center">
+                                          <button type="button" class="btn btn-default" onclick="onAddMain({{$item->id}});">메인에등록</button>
+                                          <button type="button" class="btn btn-danger" onclick="onDelete({{$item->id}});">삭제</button>
+                                   </div>
+                            </li>
+                     @empty
+                            <li style="width:100%;text-align:center">베너가 존재하지 않습니다.<li>
+                     @endforelse 
+                            
+                     </ul>
+              </div>
+              @include('admin.common.page')
+
+              <h3>현재 등록 이미지</h3>
+              <div class="program-wrap form-background-gray">
+                     <ul style="padding: 20px 10px;">
+                            @forelse($main_banner as $index => $item)
+                                   <li>
+                                          <a href="#"><img src="{{$files[$item->id]->file_path}}/{{$files[$item->id]->file_name}}"></a>
+                                          <div style="text-align:center">
+                                                 <button type="button" class="btn btn-danger"  onclick="onRemoveMain({{$item->id}});">삭제</button>
+                                          </div>
+                                   </li>
+                            @empty
+                                   <li style="width:100%;text-align:center">베너가 존재하지 않습니다.<li>
+                            @endforelse 
+                     </ul>
+              </div>
+              </div>
        </form>
+
+
 </div>
 @stop

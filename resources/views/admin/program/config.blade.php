@@ -47,14 +47,14 @@ function onSearch(){
 }
 
 function addProgram(id, name){
-    if($('#'+id).length == 0){
+    if($('.selectProgram').length < 5){ // max
+        if($('#'+id).length == 0){
 
-        var html = ' <span style="cursor: pointer;" id="'+id+'" class="badge badge-pill badge-success" onclick="removeProgram('+id+');">'+name+'</span>';
+            var html = ' <span style="cursor: pointer;" id="'+id+'" class="badge badge-pill badge-success selectProgram" onclick="removeProgram('+id+');">'+name+'</span>';
 
-        $('#addProgram').append(html);
+            $('#addProgram').append(html);
+        }
     }
-
-
 }
 
 function removeProgram(id){

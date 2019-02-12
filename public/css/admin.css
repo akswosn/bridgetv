@@ -1005,4 +1005,7 @@
 .form-error {
   color : #ff3e3e;font-weight:bold;
 }
+.form-background-gray {
+  background: #f0f2f5;
+}
 /*# sourceMappingURL=admin.css.map */

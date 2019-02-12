@@ -242,8 +242,6 @@ class Model{
                     else {
                         $result .= ' and '.$arr[1].' like ?';
                     }
-
-
                 }
                 else if($arr[0] == 'in'){
                     if($result === ''){
@@ -265,8 +263,14 @@ class Model{
                     }
                     $result .= $addA .' ) ';
                 }
-
-
+                else if($arr[0] == 'not'){
+                    if($result === ''){
+                        $result .= $arr[1].' <> ? ';
+                    }
+                    else {
+                        $result .= ' and '.$arr[1].' <> ? ';
+                    }
+                }
 
             }
             else{

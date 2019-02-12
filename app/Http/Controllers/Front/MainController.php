@@ -24,7 +24,8 @@ class MainController extends Controller
             $param = $request->all();
             
             //Banner
-            $banners =  BannerModel::select(array("del"=>"N"), array());         
+            $banners = BannerModel::select(array("del"=>"N", "not|open"=>0)
+                , array("order"=>'open asc'));  
                 
             $banners_files = array();
             if(!empty($banners)){

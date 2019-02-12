@@ -3,32 +3,64 @@
 
 
 @section('content')
+<!--
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ&callback=initMap" async defer></script>
+-->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f0f958a746873e01ef3eb1f26d4da648"></script>
 <script>
-//AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ
+//AIzaSyA83MlliXCs_2B_zQOt_1aBDK4EiXEq4JQ = goog
 var map1;
 var map2;
 function initMap() {
-    map1 = new google.maps.Map(document.getElementById('map1'), {
-        center: {lat: 37.551930, lng: 126.917985},
-        zoom: 18
+    var con1 =  document.getElementById('map1');
+    var con2 =  document.getElementById('map2');
+    var markerPosition1  = new daum.maps.LatLng(37.551930, 126.917985); 
+    var markerPosition2  = new daum.maps.LatLng(37.059839, 127.356765); 
+    var options1 = { //지도를 생성할 때 필요한 기본 옵션
+        center: markerPosition1, //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+    var options2 = { //지도를 생성할 때 필요한 기본 옵션
+        center: markerPosition2, //지도의 중심좌표.
+        level: 3 //지도의 레벨(확대, 축소 정도)
+    };
+    var map1 = new daum.maps.Map(con1, options1); //지도 생성 및 객체 리턴
+    var map2 = new daum.maps.Map(con2, options2); //지도 생성 및 객체 리턴
+
+    
+
+    // 마커를 생성합니다
+    var marker1 = new daum.maps.Marker({
+        position: markerPosition1
     });
-    map2 = new google.maps.Map(document.getElementById('map2'), {
-        center: {lat: 37.059839, lng: 127.356765},
-        zoom: 15
+    var marker2 = new daum.maps.Marker({
+        position: markerPosition2
     });
 
-    var marker = new google.maps.Marker({
-        position: {lat: 37.551930, lng: 126.917985},
-        map: map1,
-       
-    });
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker1.setMap(map1);
+    marker2.setMap(map2);
 
-    var marker = new google.maps.Marker({
-        position: {lat: 37.059839, lng: 127.356765},
-        map: map2,
+    // map1 = new google.maps.Map(document.getElementById('map1'), {
+    //     center: {lat: 37.551930, lng: 126.917985},
+    //     zoom: 18
+    // });
+    // map2 = new google.maps.Map(document.getElementById('map2'), {
+    //     center: {lat: 37.059839, lng: 127.356765},
+    //     zoom: 15
+    // });
+
+    // var marker = new google.maps.Marker({
+    //     position: {lat: 37.551930, lng: 126.917985},
+    //     map: map1,
        
-    });
+    // });
+
+    // var marker = new google.maps.Marker({
+    //     position: {lat: 37.059839, lng: 127.356765},
+    //     map: map2,
+       
+    // });
 }
 </script>
 <section class="main">
@@ -205,6 +237,8 @@ function initMap() {
             $('#wrapper').addClass('change');
         }
     });
+
+    initMap();
 </script>
 @stop
 
