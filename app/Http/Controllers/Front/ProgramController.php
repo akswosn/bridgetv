@@ -6,7 +6,7 @@ use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Models\FileModel;
 use App\Http\Models\ProgramModel;
-
+use App\Http\Models\ProgramSectionModel;
 
 class ProgramController extends Controller 
 {
@@ -191,5 +191,34 @@ class ProgramController extends Controller
             }
         }
         
+    }
+
+    public static function detail(Request $request, $id = 0){
+
+        try{
+            $param = $request->all();
+
+            $program = ProgramModel::select(array("id"=>$id)
+                , array());
+
+            
+            $programSection = ProgramSectionModel::select(array("p_id"=>$id, 'del'=>'N')
+                , array('order'=>'section asc'));
+            
+            $file = FileModel::select(array('id'=>$program[0]->file_id), array());
+
+            ProgramModel::update(array('hit'=> $program->hit+1), array('id'=>$id));
+
+
+            return view('front.program.detail', array('program'=> $program[0], 'programSection'=>$programSection, 'file'=>$file[0]));
+        }
+        catch(Exception $e){
+            if ($e instanceof \Illuminate\Session\TokenMismatchException){ //token error
+                return redirect('/_admin/login')
+                    ->withErrors([
+                        'message' => 'Validation Token was expired. Please try again',
+                        'message-type' => 'danger']);
+            }
+        }
     }
 }
