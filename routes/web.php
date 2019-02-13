@@ -70,8 +70,12 @@ Route::post('/api/fileUpload', 'FileController@upload');
 
 /**배너 */
 Route::get('/_admin/banner', 'Admin\BannerController@index');
+Route::get('/_admin/banner/{id}', 'Admin\BannerController@index');
 Route::post('/_admin/banner/update', 'Admin\BannerController@update');
 Route::get('/_admin/banner/delete/{id}', 'Admin\BannerController@delete');
+
+Route::get('/_admin/banner/addMain/{id}', 'Admin\BannerController@addMain');
+Route::get('/_admin/banner/deleteMain/{id}', 'Admin\BannerController@deleteMain');
 
 /**공지사항 */
 Route::get('/_admin/notice', 'Admin\NoticeController@index');

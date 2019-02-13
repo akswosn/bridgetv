@@ -3,6 +3,35 @@
 
 
 @section('content')
+<script>
+
+function onPlayLayer(title, movie){
+
+    var html = '<div class="title">'
+    html    +='<h3 id="layer_title">'+title+'</h3>'
+    html    +='<a class="btn-close" href="" aria-label="Close">'
+    html    +='    <i class="fa fa-close"></i>'
+    html    +='</a>'
+    html    +='</div>'
+    html    +='<div class="youtubeWrap">'
+    html    +='<iframe id="layer_movie" width="560" height="315" src="'+movie+'" frameborder="0" allowfullscreen></iframe>'
+    html    +='</div>';
+
+    $('#program_layer').html('');
+    $('#program_layer').html(html);
+
+
+    $('#program_deemed').show();
+    $('#program_layer').show();
+}
+
+function offPlayLayer(){
+    $('#program_deemed').hide();
+    $('#program_layer').hide();
+}
+
+</script>
+
 <div class="sorting">
     <ul>
         <li class="left">
@@ -15,25 +44,25 @@
         <div class="program-info">
             <div class="info-wrap">
                 <p>
-                    <img src="/images/program.jpg" alt="">
+                    <img src="{{$file->file_path}}/{{$file->file_name}}" alt="">
                 </p>
-                <h3>화요 콘서트 시즌2</h3>
+                <h3>{{$program->name}}</h3>
                 <ul>
                     <li>
                         <strong>기획의도</strong>
-                        <p>학생들이 작사 작곡 연주 노래까지 모든 부분에 참여하여 만들어내는 올라운드 뮤직 프로그램</p>
+                        <p>{{$program->planning}}</p>
                     </li>
                     <li>
                         <strong>장르</strong>
-                        <p>음악</p>
+                        <p>{{$program->genre}}</p>
                     </li>
                     <li>
                         <strong>길이</strong>
-                        <p>30분</p>
+                        <p>{{$program->playtime}}</p>
                     </li>
                     <li>
                         <strong>출연진</strong>
-                        <p>동아방송예술대학교 실용음악과 학생들</p>
+                        <p>{{$program->cast}}</p>
                     </li>
                 </ul>
             </div>
@@ -41,27 +70,32 @@
         <div class="program-playlist">
             <h4>영상 리스트</h4>
             <ul>
+            @forelse($programSection as $section)
                 <li>
-                    <a href="">
+                    <a href="javascript:onPlayLayer('{{ $section->title}}','{{ $section->movie_link}}')">
                         <div class="playlist">
                             <ul>
                                 <li>
-                                    <img src="/images/program.jpg">
+                                    <img src="{{$file->file_path}}/{{$file->file_name}}">
                                 </li>
                                 <li>
-                                    <span>1회.</span>
-                                    정유익의 유익한 장비전
+                                    <span>{{ $section->section}}회.</span>
+                                    {{ $section->title}}
                                 </li>
                             </ul>                                            
                         </div>
                     </a>
                 </li>
+            @empty
+                <li>영상이 등록되지 않았습니다.</li>
+            @endforelse
+                <!--
                 <li>
                     <a href="">
                         <div class="playlist">
                             <ul>
                                 <li>
-                                    <img src="/images/program.jpg">
+                                    <img src="{{$file->file_path}}/{{$file->file_name}}">
                                 </li>
                                 <li>
                                     <span>2회.</span>
@@ -71,24 +105,17 @@
                         </div>
                     </a>
                 </li>
+                -->
             </ul>
         </div>
     </div>                
 </div>
 
-<!--
-<div class="pop-layer">            
-    <div class="title">
-        <h3>화요콘서트 시즌2 1화</h3>
-        <a class="btn-close" href="" aria-label="Close">
-            <i class="fa fa-close"></i>
-        </a>
-    </div>
-    <div class="youtubeWrap">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/D4Z2nEdzkdc" frameborder="0" allowfullscreen></iframe>
-    </div>
+
+<div id="program_layer" class="pop-layer" style="display:none;">            
+    
 </div>
--->
+<div id="program_deemed" class="deemed" style="display: none;"></div>
 @stop
 
         
