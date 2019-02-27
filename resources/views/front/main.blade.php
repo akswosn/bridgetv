@@ -73,8 +73,8 @@ function initMap() {
             <div class="swiper-slide">WE ARE YOUNG!</div>
             -->
             @forelse($banners as $index => $item)
-                <div class="swiper-slide">
-                    <img style="height:470px" src="{{$banners_files[$item->id]->file_path}}/{{$banners_files[$item->id]->file_name}}" />
+                <div class="swiper-slide" style="background:url('{{$banners_files[$item->id]->file_path}}/{{$banners_files[$item->id]->file_name}}'); background-size:cover; background-position:center">
+                    <!--<img style="height:470px" src="{{$banners_files[$item->id]->file_path}}/{{$banners_files[$item->id]->file_name}}" />-->
                 </div>
             @empty
                 <div class="swiper-slide">등록된 배너가 존재하지 않습니다.</div>
@@ -231,12 +231,28 @@ function initMap() {
 
 <!-- Initialize Swiper -->
 <script>
-    var swiper = new Swiper('.swiper-container', {
-        pagination: {
-        el: '.swiper-pagination',
-        },
-    });
+	
+	function swiperInit(){
+		var sw_width = $('.swiper-container').width();
+		var swiper = new Swiper('.swiper-container', {
+			spaceBetween: sw_width,
+			pagination: {
+			el: '.swiper-pagination',
+			},
+		});
+		//$('.swiper-slide img').width(sw_width);
+	}
 
+	$( document ).ready(function() {
+	  // Handler for .ready() called.
+	  swiperInit();
+	});
+
+	$( window ).resize(function() {
+	  swiperInit();
+	});
+	
+	
     $('.js-header-menu').click(function(){
         if ($('#wrapper').hasClass('change')){
             $('#wrapper').removeClass('change');

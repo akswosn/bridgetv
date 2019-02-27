@@ -75,7 +75,7 @@
 <div class="btn-wrap">
     <ul>
         <li>
-            <button type="button" class="btn btn-write float-right">목록</button>
+            <button type="button" class="btn btn-write float-right" onclick="window.location.href='/board/notice'">목록</button>
         </li>
     </ul>
 </div>

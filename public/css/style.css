@@ -5,10 +5,34 @@
   font-weight: normal;
   font-style: normal;
 }
-
+body {
+	font-family:'맑은고딕', 'Malgun Gothic' ,'돋움', Dotum, '굴림', Gulim, HelveticaNeue-Light, AppleSDGothicNeo-Light, sans-serif;
+}
 #wrapper {
   margin: 0 auto;
   width: 100%;
+}
+
+#wrapper .responsive-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #cf2791;
+}
+
+#wrapper .responsive-menu li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0px;
+  float: left;
+}
+
+#wrapper .responsive-menu li ul {
+  display: none;
 }
 
 #wrapper #header {
@@ -102,7 +126,6 @@
 }
 
 #wrapper #container {
-  overflow-x: hidden;
   padding: 60px 0 0 0;
 }
 
@@ -140,10 +163,18 @@
   align-items: center;
 }
 
+#wrapper #container .main .swiper-container .swiper-pagination-bullet {
+  background: #ffffff;
+}
+
+#wrapper #container .main .swiper-container .swiper-pagination-bullet-active {
+  background: #007aff;
+}
+
 #wrapper #container .vision {
   width: 100%;
   max-width: 1100px;
-  margin: 30px auto 40px auto;
+  margin: 30px auto 10px auto;
   word-break: keep-all;
 }
 
@@ -1672,38 +1703,5 @@
   .change .deemed {
     display: block !important;
   }
-}
-/** Error box **/
-.message_box {
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  bottom: 0px;
-  cursor: pointer;
-  z-index: 9999;
-}
-.error{
-  background-color: #ff3e3e;
-}
-.success{
-  background-color: #1854fc;
-}
-.error span {
-  color: white;
-  background: url(../images/error.png) no-repeat left 19px;
-  padding: 15px;
-  line-height: 50px;
-  font-weight: bolder;
-  letter-spacing: 0;
-}
-.success span {
-  color: white;
-  padding: 15px;
-  line-height: 50px;
-  font-weight: bolder;
-  letter-spacing: 0;
-}
-.form-error {
-  color : #ff3e3e;font-weight:bold;
 }
 /*# sourceMappingURL=style.css.map */

@@ -5,7 +5,9 @@
   font-weight: normal;
   font-style: normal;
 }
-
+body {
+	font-family:'맑은고딕', 'Malgun Gothic' ,'돋움', Dotum, '굴림', Gulim, HelveticaNeue-Light, AppleSDGothicNeo-Light, sans-serif;
+}
 #wrapper {
   margin: 0 auto;
   min-width: 320px;
@@ -156,6 +158,10 @@
   padding: 12px;
   border-radius: 5px;
   margin: 10px 0 15px 0;
+}
+
+#wrapper #container .content .table-search-wrap .left .dataTables_filter img {
+  max-width: 100%;
 }
 
 #wrapper #container .content .table-search-wrap .left p {
@@ -461,10 +467,18 @@
   text-align: center;
 }
 
+#wrapper #container .content .table-wrap .program-wrap ul li div .btn {
+  margin: 20px 0 0 0;
+}
+
 #wrapper #container .content .table-wrap .program-wrap ul:after {
   clear: both;
   display: block;
   content: "";
+}
+
+#wrapper #container .content .table-wrap .form-background-gray {
+  background: #f0f2f5;
 }
 
 #wrapper #container .content .table-wrap label {
@@ -690,7 +704,7 @@
 
 #wrapper .pop-layer {
   width: 500px;
-  /* height: 500px; */
+  height: 500px;
   background: #ffffff;
   position: absolute;
   left: 50%;
@@ -971,41 +985,5 @@
   text-align: center;
   color: #92afc7;
   font-size: 11px;
-}
-/** Error box **/
-.message_box {
-  position: fixed;
-  width: 100%;
-  text-align: center;
-  bottom: 0px;
-  cursor: pointer;
-  z-index: 9999;
-}
-.error{
-  background-color: #ff3e3e;
-}
-.success{
-  background-color: #1854fc;
-}
-.error span {
-  color: white;
-  background: url(../images/error.png) no-repeat left 19px;
-  padding: 15px;
-  line-height: 50px;
-  font-weight: bolder;
-  letter-spacing: 0;
-}
-.success span {
-  color: white;
-  padding: 15px;
-  line-height: 50px;
-  font-weight: bolder;
-  letter-spacing: 0;
-}
-.form-error {
-  color : #ff3e3e;font-weight:bold;
-}
-.form-background-gray {
-  background: #f0f2f5;
 }
 /*# sourceMappingURL=admin.css.map */

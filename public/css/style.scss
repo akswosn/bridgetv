@@ -9,9 +9,33 @@
     font-style: normal;
 }
 
+body {
+	font-family:'맑은고딕', 'Malgun Gothic' ,'돋움', Dotum, '굴림', Gulim, HelveticaNeue-Light, AppleSDGothicNeo-Light, sans-serif;
+}
 #wrapper {
     margin: 0 auto;
     width: 100%;
+
+    .responsive-menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        background: #ffffff;  
+        float:left;
+        width:100%;
+        border-bottom: 1px solid #cf2791;    
+        li {
+            display: block;
+            margin: 0;
+            padding: 0;
+            border: 0px;
+            float: left;
+            ul {
+                display:none;
+            }
+        }  
+        
+    }
 
     #header {
         position:fixed;
@@ -103,7 +127,6 @@
     }
     
     #container {
-        overflow-x: hidden;
         padding:60px 0 0 0;
         h2 {
             display:block;
@@ -137,12 +160,18 @@
                     -webkit-align-items: center;
                     align-items: center;
                 }
+                .swiper-pagination-bullet {
+                    background:#ffffff;
+                }
+                .swiper-pagination-bullet-active {
+                    background:#007aff;
+                }
             }              
         }
         .vision {
             width:100%;
             max-width:1100px;
-            margin:30px auto 40px auto;
+            margin:30px auto 10px auto;
             word-break: keep-all;
 
             p {

@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Models\FileModel;
 class FileController extends Controller 
 {
-    public static $FILE_UP_PATH = "D:\app\bridgetv\public\upload"; 
+    public static $FILE_UP_PATH = "/icanpr/www/bridgetv/public/upload"; 
     //운영 : /icanpr/www/bridgetv/public/upload
     //로컬 : D:\app\bridgetv\public\upload
 
